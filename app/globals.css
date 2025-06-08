@@ -12,11 +12,6 @@ body {
   /* font-family: verdana, arial, sans-serif, helvetica; */
 }
 
-body {
-  height: 100vh;
-  overflow: auto;
-}
-
 .container {
   width: 810px;
   max-width: 100%;
