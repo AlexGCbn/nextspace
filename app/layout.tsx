@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import NavMenu from './NavMenu';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -17,6 +18,34 @@ export default function RootLayout({
 			<body>
 				<NavMenu />
 				{children}
+
+				<footer>
+					<p>
+						Created for the{' '}
+						<Link href="https://fireship.io">
+							Fireship Next.js 14 Full Course
+						</Link>
+					</p>
+					<ul>
+						<li>
+							<Link href={'/about'}>About</Link>
+						</li>{' '}
+						|
+						<li>
+							<Link href={'#'}>
+								YouTube
+							</Link>
+						</li>{' '}
+						|
+						<li>
+							<Link href={'/login'}>Source Code</Link>
+						</li>{' '}
+						|
+						<li>
+							<Link href={'https://nextjs.org'}>NextJS Docs</Link>
+						</li>
+					</ul>
+				</footer>
 			</body>
 		</html>
 	);
