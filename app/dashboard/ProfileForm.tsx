@@ -1,30 +1,18 @@
 'use client';
 
-export function ProfileForm({ user }: any) {
-	const updateUser = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const formData = new FormData(e.currentTarget);
+import { User } from '@/generated/prisma';
+import { prisma } from '@/lib/prisma';
 
-		const body = {
-			name: formData.get('name'),
-			bio: formData.get('bio'),
-			age: parseInt(formData.get('age') as string, 10),
-			image: formData.get('image'),
-		};
+interface ProfileFormProps {
+	user: User;
+	onUpdate: (formData: FormData, user: User) => void;
+}
 
-		const res = await fetch('/api/user', {
-			method: 'PUT',
-			body: JSON.stringify(body),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-	};
-
+export function ProfileForm({ user, onUpdate }: ProfileFormProps) {
 	return (
 		<div>
 			<h2>Edit Your Profile</h2>
-			<form onSubmit={updateUser}>
+			<form action={(formData: FormData) => onUpdate(formData, user)}>
 				<label htmlFor='name'>Name</label>
 				<input type='text' name='name' defaultValue={user?.name ?? ''} />
 				<label htmlFor='bio'>Bio</label>
