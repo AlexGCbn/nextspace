@@ -50,7 +50,18 @@ model User {
   age           Int?
   bio           String?
   accounts      Account[]
+  following     Follows[] @relation("follower")
+  followedBy    Follows[] @relation("following")
   sessions      Session[]
+}
+
+model Follows {
+  followerId  String
+  followingId String
+  follower    User   @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
 }
 
 model VerificationToken {
